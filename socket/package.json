@@ -1,0 +1,17 @@
+{
+  "name": "socket",
+  "version": "1.0.0",
+  "description": "The realtime webserver for Teachify",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "Glitters Team",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "nodemon": "^2.0.15",
+    "socket.io": "^4.3.2"
+  }
+}

@@ -5,7 +5,7 @@
 ## Built with NODEJS EXPRESS MONGODB SOCKET.IO
 
 View live link below
-[Teachify](https://teachify.netlify.app).
+[Teachify](https://teachify-learning.netlify.app).
 
 ![Teachify](https://res.cloudinary.com/devsource/image/upload/v1656504181/portfolio/project-one_jvk8lz.png)
 

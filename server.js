@@ -43,9 +43,9 @@ mongoose.connect(
   }
 );
 
-// app.get('/', (req, res) => {
-//   res.send('WELCOME TO TEACHIFY BACKEND [GLITTERS TEAM]');
-// });
+app.get('/', (req, res) => {
+  res.send('WELCOME TO TEACHIFY API');
+});
 
 // THE SECTION OF THE SOCKET
 let onlineUsers = [];

@@ -17,10 +17,10 @@ const userCtrl = {
   // The section that registers the users
   register: async (req, res) => {
     try {
-      const { fullname, username, email, gender, role, password } = req.body;
+      const { fullname, username, email, gender, password } = req.body;
 
       // VALIDATING USER INPUT
-      if (!fullname || !username || !email || !gender || !role || !password)
+      if (!fullname || !username || !email || !gender || !password)
         return res.status(400).json({ msg: 'Please fill in all fields' });
 
       // VALIDATING USER EMAIL
@@ -53,7 +53,6 @@ const userCtrl = {
         username,
         email,
         gender,
-        role,
         password: passwordHash,
       };
 
@@ -84,7 +83,7 @@ const userCtrl = {
         process.env.ACTIVATION_TOKEN_SECRET
       );
 
-      const { fullname, username, email, gender, role, password } = user;
+      const { fullname, username, email, gender, password } = user;
 
       // Check if user already exists
       const check = await Users.findOne({ email });
@@ -96,7 +95,6 @@ const userCtrl = {
         username,
         email,
         gender,
-        role,
         password,
       });
 
@@ -164,7 +162,7 @@ const userCtrl = {
       const access_token = createAccessToken({ id: user._id });
       const url = `${CLIENT_URL}/user/reset/${access_token}`;
 
-      passwordMail(email, url, 'Reset your password'); 
+      passwordMail(email, url, 'Reset your password');
       res.json({ msg: 'please check your email to continue' });
     } catch (err) {
       return res.status(500).json({ msg: err.message });

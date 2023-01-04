@@ -2,7 +2,7 @@ import { Server } from 'socket.io';
 
 const io = new Server({
   cors: {
-    origin: 'http://teachify-learning.netlify.app',
+    origin: 'https://teachify-learning.netlify.app',
   },
 });
 

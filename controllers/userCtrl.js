@@ -119,15 +119,9 @@ const userCtrl = {
       if (!isMatch) return res.status(400).json({ msg: 'Incorrect Password' });
 
       // If login success , create refresh token
-      const refresh_token = createRefreshToken({ id: user._id });
+      const access_token = createAccessToken({ id: user._id });
 
-      res.cookie('refreshtoken', refresh_token, {
-        httpOnly: true,
-        path: '/user/refresh_token',
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 7d
-      });
-
-      res.json({ msg: 'Login success!' });
+      res.json({ msg: 'Login success!', access_token });
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }
@@ -137,7 +131,8 @@ const userCtrl = {
   getAccessToken: (req, res) => {
     try {
       const rf_token = req.cookies.refreshtoken;
-      if (!rf_token) res.status(400).json({ msg: 'Please Login or Register' });
+      if (!rf_token)
+        return res.status(400).json({ msg: 'Please Login or Register' });
 
       jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
         if (err) return res.status(400).json({ msg: 'Please Login again' });
@@ -415,7 +410,7 @@ const createActivationToken = (payload) => {
 };
 
 const createAccessToken = (user) => {
-  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '30m' });
+  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1d' });
 };
 
 const createRefreshToken = (user) => {
